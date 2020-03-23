@@ -5,9 +5,6 @@ RES_DIR="$(pwd)/resources"
 # u-boot related settings
 INST_STATUS=0
 
-# misc settings
-DEFAULT_WALLPAPER="AM-wallpaper-landscape.png"
-
 # check for root
 if [[ $EUID -ne 0 ]];
 then
@@ -18,10 +15,10 @@ fi
 
 # update modules
 echo "Updating kernel modules..."
-if [ -d "/lib/modules/4.4.38-antmicro" ]; then
-    rm -r "/lib/modules/4.4.38-antmicro"
+if [ -d "/lib/modules/4.9.140-tegra" ]; then
+    rm -r "/lib/modules/4.9.140-tegra"
 fi
-if ! cp -r "$RES_DIR/modules-4.4.38-antmicro" "/lib/modules/4.4.38-antmicro"
+if ! cp -r "$RES_DIR/modules-4.9.140-tegra" "/lib/modules/4.9.140-tegra"
 then
     INST_STATUS=1
     echo "Unable to update kernel modules."
@@ -37,21 +34,12 @@ sed -i "s/PermitRootLogin prohibit-password/PermitRootLogin yes/g" /etc/ssh/sshd
 echo "antmicro-tx2-baseboard" > /etc/hostname
 echo -n -e "127.0.0.1 localhost\n127.0.0.1 antmicro-tx2-baseboard\n" > /etc/hosts
 
-# copy default wallpaper
-if ! cp "$RES_DIR/$DEFAULT_WALLPAPER" "/usr/share/backgrounds"
-then
-    INST_STATUS=1
-    echo "Unable to copy file $DEFAULT_WALLPAPER"
-else
-    DISPLAY=:0.0 gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/$DEFAULT_WALLPAPER
-fi
-
 # update linux-headers
 echo "Updating linux-headers..."
-if ! cp -r "$RES_DIR/linux-headers-4.4.38-antmicro" "/usr/src/"
+if ! cp -r "$RES_DIR/linux-headers-4.9.140-tegra" "/usr/src/"
 then
     INST_STATUS=1
-    echo "Unable to copy linux-headers-4.4.38-antmicro"
+    echo "Unable to copy linux-headers-4.9.140-tegra"
 fi
 
 sync

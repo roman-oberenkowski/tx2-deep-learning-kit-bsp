@@ -20,6 +20,7 @@
 
 #define CAM0_RST_L	TEGRA_MAIN_GPIO(R, 5)
 #define CAM0_PWDN	TEGRA_MAIN_GPIO(R, 0)
+#define CAMERA_I2C_MUX_BUS(x) (0x1E + x)
 
 /* camera control gpio definitions */
 
@@ -27,9 +28,18 @@
 	i2c@c240000 {
 
 		tca9548_70: tca9548@70 {
+			
+            status = "okay";
+            compatible = "nxp,pca9548";
+			reg = <0x70>;
+			#address-cells = <1>;
+			#size-cells = <0>;
+			force_bus_start = <CAMERA_I2C_MUX_BUS(0)>;
 
 			i2c@0{
-				ov5640_c@3c {
+                status = "okay";
+                ov5640_c@3c {
+                    status = "okay";
 					/* Define any required hw resources needed by driver */
 					/* ie. clocks, io pins, power sources */
 					/* mclk-index indicates the index of the */
@@ -49,7 +59,9 @@
 			};
 	
 			i2c@1{
+                status = "okay";
 				ov5640_d@3c {
+                    status = "okay";
 					/* Define any required hw resources needed by driver */
 					/* ie. clocks, io pins, power sources */
 					/* mclk-index indicates the index of the */
@@ -69,7 +81,9 @@
 			};
 			
 			i2c@2{
+                status = "okay";
 				ov5640_a@3c {
+                    status = "okay";
 					/* Define any required hw resources needed by driver */
 					/* ie. clocks, io pins, power sources */
 					/* mclk-index indicates the index of the */
@@ -88,7 +102,9 @@
 				}; 
 			};
 			i2c@3{
+                status = "okay";
 				ov5640_b@3c {
+                    status = "okay";
 					/* Define any required hw resources needed by driver */
 					/* ie. clocks, io pins, power sources */
 					/* mclk-index indicates the index of the */
@@ -107,7 +123,9 @@
 				}; 
 			};
 			i2c@4{
+                status = "okay";
 				ov5640_f@3c {
+                    status = "okay";
 					/* Define any required hw resources needed by driver */
 					/* ie. clocks, io pins, power sources */
 					/* mclk-index indicates the index of the */
@@ -127,7 +145,9 @@
 			};
 			
 			i2c@5{
+                status = "okay";
 				ov5640_e@3c {
+                    status = "okay";
 					/* Define any required hw resources needed by driver */
 					/* ie. clocks, io pins, power sources */
 					/* mclk-index indicates the index of the */
@@ -150,6 +170,7 @@
 
 	gpio@2200000 {
 		camera-control-output-low {
+            status = "okay";
 			gpio-hog;
 			output-low;
 			gpios = <CAM0_RST_L 0 CAM0_PWDN 0>;

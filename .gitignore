@@ -112,3 +112,14 @@ all.config
 
 # Kdevelop4
 *.kdev4
+
+*.dtb
+*.zip
+*.dtb
+*.conf
+*.conf*
+
+mod*
+Image
+zImage
+vmlinux*
