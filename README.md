@@ -2,7 +2,7 @@ TX2 Deep Learning Kit BSP
 =========================
 <img src="https://github.com/EmbeddedPaul166/tx2-deep-learning-kit-bsp/blob/master/Images/tx2-deep-learning-kit.png">
  
-This is a fork of original BSP from antmicro, that contains a port for linux kernel 4.9 (Jetpack 4.3). Current release offers OV5640 cameras support, but has disabled USB 3.0 port, which will probably be fixed in the near future.
+This is a fork of original BSP from antmicro, that contains a port for linux kernel 4.9 (Jetpack 4.3).
 
 # Deployment
 
