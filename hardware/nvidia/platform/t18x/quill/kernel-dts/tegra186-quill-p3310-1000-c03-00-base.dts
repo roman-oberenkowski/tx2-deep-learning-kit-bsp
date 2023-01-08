@@ -21,6 +21,30 @@
 	nvidia,fastboot-usb-vid = <0x0955>;
 	nvidia,fastboot-usb-pid = <0xee16>;
 
+    chosen {
+		board-has-eeprom;
+		stdout-path = "/serial@3100000";
+		plugin-manager {
+
+			odm-data {
+				chip-id = "A02P";
+				enable-baseboard-cam-ov5640 = <0x1>;
+				normal-flashed = <0x1>;
+				no-battery = <0x1>;
+				disable-sdmmc-hwcq = <0x1>;
+				disable-pmic-wdt = <0x1>;
+				enable-denver-wdt = <0x1>;
+				android-build = <0x1>;
+				enable-debug-console = <0x1>;
+				disable-tegra-wdt = <0x1>;
+				l4t;
+			};
+			ids {
+				3310-1000-B02-B = <0x00000001>;
+			};
+		};
+	};
+    
 	pinmux@2430000 {
 		common {
 			gpio_edp2_pp5 {
@@ -84,7 +108,7 @@
 		nvidia,cd-wakeup-capable;
 	};
 
-	hdr40_i2c0: i2c@3160000 {
+	/*hdr40_i2c0: i2c@3160000 {
 		ina3221x@40 {
 			channel@0 {
 				ti,shunt-resistor-mohm = <10>;
@@ -105,7 +129,7 @@
 				ti,shunt-resistor-mohm = <10>;
 			};
 		};
-	};
+	};*/
 
 	hdr40_i2c1: i2c@c240000 {
 		bmi160@69 {
