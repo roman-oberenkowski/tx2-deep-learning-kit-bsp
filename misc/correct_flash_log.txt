@@ -1,0 +1,553 @@
+ubuntu@ubuntu-1tb:~/tx2_workdir/scripts$ sh flash.sh 
+###############################################################################
+# L4T BSP Information:
+# R32 , REVISION: 7.3
+###############################################################################
+# Target Board Information:
+# Name: jetson-tx2, Board Family: t186ref, SoC: Tegra 186, 
+# OpMode: production, Boot Authentication: NS, 
+# Disk encryption: disabled ,
+###############################################################################
+./tegraflash.py --chip 0x18 --applet "/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/mb1_recovery_prod.bin" --skipuid --cmd "dump eeprom boardinfo cvm.bin" 
+Welcome to Tegra Flash
+version 1.0.0
+Type ? or help for help and q or quit to exit
+Use ! to execute system commands
+ 
+[   0.0012 ] Generating RCM messages
+[   0.0031 ] tegrarcm_v2 --listrcm rcm_list.xml --chip 0x18 0 --download rcm /home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/mb1_recovery_prod.bin 0 0
+[   0.0036 ] RCM 0 is saved as rcm_0.rcm
+[   0.0042 ] RCM 1 is saved as rcm_1.rcm
+[   0.0042 ] List of rcm files are saved in rcm_list.xml
+[   0.0042 ] 
+[   0.0042 ] Signing RCM messages
+[   0.0061 ] tegrasign_v3.py --key None --list rcm_list.xml --pubkeyhash pub_key.key
+[   0.0062 ] Assuming zero filled SBK key
+[   0.0146 ] Copying signature to RCM mesages
+[   0.0161 ] tegrarcm_v2 --chip 0x18 0 --updatesig rcm_list_signed.xml
+[   0.0167 ] 
+[   0.0167 ] Boot Rom communication
+[   0.0182 ] tegrarcm_v2 --chip 0x18 0 --rcm rcm_list_signed.xml --skipuid
+[   0.0185 ] RCM version 0X180001
+[   0.1370 ] Boot Rom communication completed
+[   1.1447 ] 
+[   2.1505 ] tegrarcm_v2 --isapplet
+[   2.1535 ] Applet version 01.00.0000
+[   2.4074 ] 
+[   2.4118 ] Retrieving EEPROM data
+[   2.4121 ] tegrarcm_v2 --oem platformdetails eeprom cvm /home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/cvm.bin
+[   2.4144 ] Applet version 01.00.0000
+[   2.6819 ] Saved platform info in /home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/cvm.bin
+[   2.7552 ] 
+Board ID(3310) version(D01) sku(1000) revision(B.0)
+Copy /home/ubuntu/tx2_workdir/Linux_for_Tegra/kernel/dtb/tegra186-quill-p3310-1000-c03-00-base.dtb to /home/ubuntu/tx2_workdir/Linux_for_Tegra/kernel/dtb/tegra186-quill-p3310-1000-c03-00-base.dtb.rec
+copying bctfile(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/t186ref/BCT/P3310_A00_8GB_lpddr4_A02_l4t.cfg)... done.
+copying misc_config(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/t186ref/BCT/tegra186-mb1-bct-misc-si-l4t.cfg)... done.
+copying pinmux_config(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/t186ref/BCT/tegra186-mb1-bct-pinmux-quill-p3310-1000-c03.cfg)... done.
+copying pmic_config(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/t186ref/BCT/tegra186-mb1-bct-pmic-quill-p3310-1000-c04.cfg)... done.
+copying pmc_config(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/t186ref/BCT/tegra186-mb1-bct-pad-quill-p3310-1000-c03.cfg)... done.
+copying prod_config(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/t186ref/BCT/tegra186-mb1-bct-prod-quill-p3310-1000-c03.cfg)... done.
+copying scr_config(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/t186ref/BCT/minimal_scr.cfg)... done.
+copying scr_cold_boot_config(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/t186ref/BCT/mobile_scr.cfg)... done.
+copying bootrom_config(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/t186ref/BCT/tegra186-mb1-bct-bootrom-quill-p3310-1000-c03.cfg)... done.
+copying dev_params(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/t186ref/BCT/emmc.cfg)... done.
+Existing bootloader(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/nvtboot_cpu.bin) reused.
+copying initrd(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/l4t_initrd.img)... done.
+Making Boot image... done.
+/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/tegraflash.py --chip 0x18 --key  --cmd sign boot.img kernel
+Welcome to Tegra Flash
+version 1.0.0
+Type ? or help for help and q or quit to exit
+Use ! to execute system commands
+ 
+[   0.0002 ] Generating signature
+[   0.0020 ] tegrasign_v3.py --getmode mode.txt --key 
+[   0.0020 ] Assuming zero filled SBK key : not reading 
+[   0.0021 ] sign_type   : 0
+[   0.0021 ] header_magic: 414e4452
+[   0.0042 ] tegrahost_v2 --chip 0x18 --align 1_boot.img
+[   0.0061 ] 
+[   0.0070 ] tegrahost_v2 --chip 0x18 0 --appendsigheader 1_boot.img zerosbk
+[   0.0080 ] 
+[   0.0102 ] tegrasign_v3.py --key  --list 1_boot_sigheader.img_list.xml --pubkeyhash pub_key.key
+[   0.0102 ] Assuming zero filled SBK key : not reading 
+[   0.0175 ] tegrahost_v2 --chip 0x18 0 --updatesigheader 1_boot_sigheader.img.encrypt 1_boot_sigheader.img.hash zerosbk
+[   0.0185 ] 
+[   0.0188 ] Signed file: /home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/temp_user_dir/boot_sigheader.img.encrypt
+l4t_sign_image.sh: Generate header for boot_sigheader.img.encrypt
+l4t_sign_image.sh: chip 0x18: Don't need to do anything
+l4t_sign_image.sh: Generate 16-byte-size-aligned base file for boot_sigheader.img.encrypt
+l4t_sign_image.sh: the signed file is /home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/temp_user_dir/boot_sigheader.img.encrypt
+done.
+Making recovery ramdisk for recovery image...
+Re-generating recovery ramdisk for recovery image...
+/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/ramdisk_tmp /home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader /home/ubuntu/tx2_workdir/Linux_for_Tegra
+30412 blocks
+_BASE_KERNEL_VERSION=4.9.140-tegra
+cp: cannot stat '/home/ubuntu/tx2_workdir/Linux_for_Tegra/rootfs/lib/modules/4.9.140-tegra/kernel/drivers/net/wireless/bcmdhd/bcmdhd.ko': No such file or directory
+warning: cp -f /home/ubuntu/tx2_workdir/Linux_for_Tegra/rootfs/lib/modules/4.9.140-tegra/kernel/drivers/net/wireless/bcmdhd/bcmdhd.ko /home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/ramdisk_tmp//lib/modules/4.9.140-tegra/kernel/drivers/net/wireless/bcmdhd/bcmdhd.ko
+cp: cannot stat '/home/ubuntu/tx2_workdir/Linux_for_Tegra/rootfs/lib/modules/4.9.140-tegra/kernel/net/wireless/lib80211.ko': No such file or directory
+warning: cp -f /home/ubuntu/tx2_workdir/Linux_for_Tegra/rootfs/lib/modules/4.9.140-tegra/kernel/net/wireless/lib80211.ko /home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/ramdisk_tmp//lib/modules/4.9.140-tegra/kernel/net/wireless/lib80211.ko
+cp: cannot stat '/home/ubuntu/tx2_workdir/Linux_for_Tegra/rootfs/lib/modules/4.9.140-tegra/kernel/net/wireless/cfg80211.ko': No such file or directory
+warning: cp -f /home/ubuntu/tx2_workdir/Linux_for_Tegra/rootfs/lib/modules/4.9.140-tegra/kernel/net/wireless/cfg80211.ko /home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/ramdisk_tmp//lib/modules/4.9.140-tegra/kernel/net/wireless/cfg80211.ko
+/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/ramdisk_tmp/lib /home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/ramdisk_tmp /home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader /home/ubuntu/tx2_workdir/Linux_for_Tegra
+61354 blocks
+Making Recovery image...
+copying recdtbfile(/home/ubuntu/tx2_workdir/Linux_for_Tegra/kernel/dtb/tegra186-quill-p3310-1000-c03-00-base.dtb.rec)... done.
+20+0 records in
+20+0 records out
+20 bytes copied, 0,000304412 s, 65,7 kB/s
+Existing sosfile(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/mb1_recovery_prod.bin) reused.
+copying tegraboot(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/t186ref/nvtboot.bin)... done.
+Existing cpu_bootloader(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/nvtboot_cpu.bin) reused.
+Existing mb2blfile(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/nvtboot_recovery.bin) reused.
+Existing mtspreboot(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/preboot_d15_prod_cr.bin) reused.
+Existing mts(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/mce_mts_d15_prod_cr.bin) reused.
+Existing mb1file(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/mb1_prod.bin) reused.
+Existing bpffile(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/bpmp.bin) reused.
+copying bpfdtbfile(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/t186ref/tegra186-a02-bpmp-quill-p3310-1000-c04-00-te770d-ucm2.dtb)... done.
+Existing scefile(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/camera-rtcpu-sce.img) reused.
+Existing spefile(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/spe.bin) reused.
+copying wb0boot(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/t186ref/warmboot.bin)... done.
+Existing tosfile(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/tos-trusty.img) reused.
+Existing eksfile(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/eks.img) reused.
+copying dtbfile(/home/ubuntu/tx2_workdir/Linux_for_Tegra/kernel/dtb/tegra186-quill-p3310-1000-c03-00-base.dtb)... done.
+Copying nv_boot_control.conf to rootfs
+/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/tegraflash.py --chip 0x18 --key  --cmd sign kernel_tegra186-quill-p3310-1000-c03-00-base.dtb kernel_dtb
+Welcome to Tegra Flash
+version 1.0.0
+Type ? or help for help and q or quit to exit
+Use ! to execute system commands
+ 
+[   0.0003 ] Generating signature
+[   0.0022 ] tegrasign_v3.py --getmode mode.txt --key 
+[   0.0022 ] Assuming zero filled SBK key : not reading 
+[   0.0023 ] sign_type   : 50331648
+[   0.0023 ] header_magic: d00dfeed
+[   0.0029 ] tegrahost_v2 --chip 0x18 --align 1_kernel_tegra186-quill-p3310-1000-c03-00-base.dtb
+[   0.0033 ] 
+[   0.0039 ] tegrahost_v2 --chip 0x18 0 --appendsigheader 1_kernel_tegra186-quill-p3310-1000-c03-00-base.dtb zerosbk
+[   0.0045 ] 
+[   0.0064 ] tegrasign_v3.py --key  --list 1_kernel_tegra186-quill-p3310-1000-c03-00-base_sigheader.dtb_list.xml --pubkeyhash pub_key.key
+[   0.0065 ] Assuming zero filled SBK key : not reading 
+[   0.0100 ] tegrahost_v2 --chip 0x18 0 --updatesigheader 1_kernel_tegra186-quill-p3310-1000-c03-00-base_sigheader.dtb.encrypt 1_kernel_tegra186-quill-p3310-1000-c03-00-base_sigheader.dtb.hash zerosbk
+[   0.0105 ] 
+[   0.0108 ] Signed file: /home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/temp_user_dir/kernel_tegra186-quill-p3310-1000-c03-00-base_sigheader.dtb.encrypt
+l4t_sign_image.sh: Generate header for kernel_tegra186-quill-p3310-1000-c03-00-base_sigheader.dtb.encrypt
+l4t_sign_image.sh: chip 0x18: Don't need to do anything
+l4t_sign_image.sh: Generate 16-byte-size-aligned base file for kernel_tegra186-quill-p3310-1000-c03-00-base_sigheader.dtb.encrypt
+l4t_sign_image.sh: the signed file is /home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/temp_user_dir/kernel_tegra186-quill-p3310-1000-c03-00-base_sigheader.dtb.encrypt
+done.
+	populating kernel to rootfs... done.
+	populating initrd to rootfs... done.
+	populating kernel_tegra186-quill-p3310-1000-c03-00-base.dtb to rootfs... done.
+Making system.img... 
+	populating rootfs from /home/ubuntu/tx2_workdir/Linux_for_Tegra/rootfs ... 	populating /boot/extlinux/extlinux.conf ... done.
+	Sync'ing system.img ... done.
+	Converting RAW image to Sparse image... done.
+system.img built successfully. 
+Existing tbcfile(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/cboot.bin) reused.
+copying tbcdtbfile(/home/ubuntu/tx2_workdir/Linux_for_Tegra/kernel/dtb/tegra186-quill-p3310-1000-c03-00-base.dtb)... done.
+copying cfgfile(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/t186ref/cfg/flash_l4t_t186.xml) to flash.xml... done.
+Existing flasher(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/nvtboot_recovery_cpu.bin) reused.
+Existing flashapp(/home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/tegraflash.py) reused.
+./tegraflash.py --bl nvtboot_recovery_cpu.bin --sdram_config P3310_A00_8GB_lpddr4_A02_l4t.cfg --odmdata 0x1090000 --applet mb1_recovery_prod.bin  --cmd "flash; reboot"  --cfg flash.xml --chip 0x18 --misc_config tegra186-mb1-bct-misc-si-l4t.cfg --pinmux_config tegra186-mb1-bct-pinmux-quill-p3310-1000-c03.cfg --pmic_config tegra186-mb1-bct-pmic-quill-p3310-1000-c04.cfg --pmc_config tegra186-mb1-bct-pad-quill-p3310-1000-c03.cfg --prod_config tegra186-mb1-bct-prod-quill-p3310-1000-c03.cfg --scr_config minimal_scr.cfg --scr_cold_boot_config mobile_scr.cfg --br_cmd_config tegra186-mb1-bct-bootrom-quill-p3310-1000-c03.cfg --dev_params emmc.cfg  --bins "mb2_bootloader nvtboot_recovery.bin; mts_preboot preboot_d15_prod_cr.bin; mts_bootpack mce_mts_d15_prod_cr.bin; bpmp_fw bpmp.bin; bpmp_fw_dtb tegra186-a02-bpmp-quill-p3310-1000-c04-00-te770d-ucm2.dtb; tlk tos-trusty.img; eks eks.img; bootloader_dtb tegra186-quill-p3310-1000-c03-00-base.dtb"   
+saving flash command in /home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/flashcmd.txt
+saving Windows flash command to /home/ubuntu/tx2_workdir/Linux_for_Tegra/bootloader/flash_win.bat
+*** Flashing target device started. ***
+Welcome to Tegra Flash
+version 1.0.0
+Type ? or help for help and q or quit to exit
+Use ! to execute system commands
+ 
+[   0.0046 ] tegrasign_v3.py --getmode mode.txt --key None
+[   0.0047 ] Assuming zero filled SBK key
+[   0.0017 ] Generating RCM messages
+[   0.0040 ] tegrarcm_v2 --listrcm rcm_list.xml --chip 0x18 0 --download rcm mb1_recovery_prod.bin 0 0
+[   0.0044 ] RCM 0 is saved as rcm_0.rcm
+[   0.0061 ] RCM 1 is saved as rcm_1.rcm
+[   0.0062 ] List of rcm files are saved in rcm_list.xml
+[   0.0063 ] 
+[   0.0063 ] Signing RCM messages
+[   0.0108 ] tegrasign_v3.py --key None --list rcm_list.xml --pubkeyhash pub_key.key
+[   0.0108 ] Assuming zero filled SBK key
+[   0.0160 ] Copying signature to RCM mesages
+[   0.0175 ] tegrarcm_v2 --chip 0x18 0 --updatesig rcm_list_signed.xml
+[   0.0180 ] 
+[   0.0180 ] Parsing partition layout
+[   0.0200 ] tegraparser_v2 --pt flash.xml.tmp
+[   0.0220 ] 
+[   0.0220 ] Using default ramcode: 0
+[   0.0220 ] Disable BPMP dtb trim, using default dtb
+[   0.0220 ] 
+[   0.0220 ] Creating list of images to be signed
+[   0.0241 ] tegrahost_v2 --chip 0x18 0 --partitionlayout flash.xml.bin --list images_list.xml zerosbk
+[   0.2063 ] 
+[   0.2063 ] Generating signatures
+[   0.2112 ] tegrasign_v3.py --key None --list images_list.xml --pubkeyhash pub_key.key
+[   0.2113 ] Assuming zero filled SBK key
+[   0.6955 ] Generating br-bct
+[   0.6977 ] Updating dev and MSS params in BR BCT
+[   0.6978 ] tegrabct_v2 --dev_param emmc.cfg --sdram P3310_A00_8GB_lpddr4_A02_l4t.cfg --brbct br_bct.cfg --chip 0x18 0
+[   0.7111 ] 
+[   0.7111 ] Updating bl info
+[   0.7128 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x18 0 --updateblinfo flash.xml.bin --updatesig images_list_signed.xml
+[   0.7135 ] 
+[   0.7135 ] Updating smd info
+[   0.7151 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x18 --updatesmdinfo flash.xml.bin
+[   0.7157 ] 
+[   0.7157 ] Updating Odmdata
+[   0.7172 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x18 0 --updatefields Odmdata =0x1090000
+[   0.7176 ] 
+[   0.7176 ] Get Signed section of bct
+[   0.7191 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x18 0 --listbct bct_list.xml
+[   0.7195 ] 
+[   0.7210 ] tegrasign_v3.py --key None --list bct_list.xml --pubkeyhash pub_key.key
+[   0.7213 ] Assuming zero filled SBK key
+[   0.7411 ] 
+[   0.7411 ] Updating BCT with signature
+[   0.7428 ] tegrabct_v2 --brbct br_bct_BR.bct --chip 0x18 0 --updatesig bct_list_signed.xml
+[   0.7434 ] 
+[   0.7434 ] Generating coldboot mb1-bct
+[   0.7449 ] tegrabct_v2 --chip 0x18 0 --mb1bct mb1_cold_boot_bct.cfg --sdram P3310_A00_8GB_lpddr4_A02_l4t.cfg --misc tegra186-mb1-bct-misc-si-l4t.cfg --scr mobile_scr.cfg --pinmux tegra186-mb1-bct-pinmux-quill-p3310-1000-c03.cfg --pmc tegra186-mb1-bct-pad-quill-p3310-1000-c03.cfg --pmic tegra186-mb1-bct-pmic-quill-p3310-1000-c04.cfg --brcommand tegra186-mb1-bct-bootrom-quill-p3310-1000-c03.cfg --prod tegra186-mb1-bct-prod-quill-p3310-1000-c03.cfg
+[   0.7453 ] MB1-BCT version: 0xf
+[   0.7454 ] Packing sdram param for instance[0]
+[   0.7546 ] Packing sdram param for instance[1]
+[   0.7547 ] Packing sdram param for instance[2]
+[   0.7548 ] Packing sdram param for instance[3]
+
+[   0.7549 ] Parsing config file :tegra186-mb1-bct-pinmux-quill-p3310-1000-c03.cfg 
+[   0.7551 ] Appending platform config data of size :- 3032
+
+[   0.7554 ] Parsing config file :mobile_scr.cfg 
+[   0.7556 ] Appending platform config data of size :- 12240
+
+[   0.7569 ] Parsing config file :tegra186-mb1-bct-pad-quill-p3310-1000-c03.cfg 
+[   0.7571 ] Appending platform config data of size :- 24
+
+[   0.7572 ] Parsing config file :tegra186-mb1-bct-pmic-quill-p3310-1000-c04.cfg 
+[   0.7574 ] Appending platform config data of size :- 672
+
+[   0.7577 ] Parsing config file :tegra186-mb1-bct-bootrom-quill-p3310-1000-c03.cfg 
+[   0.7579 ] Appending platform config data of size :- 64
+[   0.7579 ] 
+[   0.7579 ] Parsing config file :tegra186-mb1-bct-prod-quill-p3310-1000-c03.cfg 
+[   0.7579 ] Appending platform config data of size :- 1628
+[   0.7579 ] 
+[   0.7580 ] Updating mb1-bct with firmware information
+[   0.7597 ] tegrabct_v2 --chip 0x18 --mb1bct mb1_cold_boot_bct_MB1.bct --updatefwinfo flash.xml.bin
+[   0.7602 ] MB1-BCT version: 0xf
+[   0.7606 ] 
+[   0.7606 ] Updating mb1-bct with storage information
+[   0.7623 ] tegrabct_v2 --chip 0x18 --mb1bct mb1_cold_boot_bct_MB1.bct --updatestorageinfo flash.xml.bin
+[   0.7629 ] MB1-BCT version: 0xf
+[   0.7633 ] 
+[   0.7651 ] tegrahost_v2 --chip 0x18 --align mb1_cold_boot_bct_MB1.bct
+[   0.7659 ] 
+[   0.7678 ] tegrahost_v2 --chip 0x18 0 --appendsigheader mb1_cold_boot_bct_MB1.bct zerosbk
+[   0.7687 ] 
+[   0.7739 ] tegrasign_v3.py --key None --list mb1_cold_boot_bct_MB1_sigheader.bct_list.xml --pubkeyhash pub_key.key
+[   0.7739 ] Assuming zero filled SBK key
+[   0.7760 ] tegrahost_v2 --chip 0x18 0 --updatesigheader mb1_cold_boot_bct_MB1_sigheader.bct.encrypt mb1_cold_boot_bct_MB1_sigheader.bct.hash zerosbk
+[   0.7771 ] 
+[   0.7772 ] Generating recovery mb1-bct
+[   0.7792 ] tegrabct_v2 --chip 0x18 0 --mb1bct mb1_bct.cfg --sdram P3310_A00_8GB_lpddr4_A02_l4t.cfg --misc tegra186-mb1-bct-misc-si-l4t.cfg --scr minimal_scr.cfg --pinmux tegra186-mb1-bct-pinmux-quill-p3310-1000-c03.cfg --pmc tegra186-mb1-bct-pad-quill-p3310-1000-c03.cfg --pmic tegra186-mb1-bct-pmic-quill-p3310-1000-c04.cfg --brcommand tegra186-mb1-bct-bootrom-quill-p3310-1000-c03.cfg --prod tegra186-mb1-bct-prod-quill-p3310-1000-c03.cfg
+[   0.7801 ] MB1-BCT version: 0xf
+[   0.7803 ] Packing sdram param for instance[0]
+[   0.7937 ] Packing sdram param for instance[1]
+[   0.7938 ] Packing sdram param for instance[2]
+[   0.7939 ] Packing sdram param for instance[3]
+
+[   0.7940 ] Parsing config file :tegra186-mb1-bct-pinmux-quill-p3310-1000-c03.cfg 
+[   0.7942 ] Appending platform config data of size :- 3032
+
+[   0.7944 ] Parsing config file :minimal_scr.cfg 
+[   0.7945 ] Appending platform config data of size :- 12240
+
+[   0.7957 ] Parsing config file :tegra186-mb1-bct-pad-quill-p3310-1000-c03.cfg 
+[   0.7958 ] Appending platform config data of size :- 24
+[   0.7958 ] 
+[   0.7958 ] Parsing config file :tegra186-mb1-bct-pmic-quill-p3310-1000-c04.cfg 
+[   0.7959 ] Appending platform config data of size :- 672
+[   0.7959 ] 
+[   0.7959 ] Parsing config file :tegra186-mb1-bct-bootrom-quill-p3310-1000-c03.cfg 
+[   0.7959 ] Appending platform config data of size :- 64
+[   0.7959 ] 
+[   0.7959 ] Parsing config file :tegra186-mb1-bct-prod-quill-p3310-1000-c03.cfg 
+[   0.7959 ] Appending platform config data of size :- 1628
+[   0.7959 ] 
+[   0.7959 ] Updating mb1-bct with firmware information
+[   0.7975 ] tegrabct_v2 --chip 0x18 --mb1bct mb1_bct_MB1.bct --updatefwinfo flash.xml.bin
+[   0.7979 ] MB1-BCT version: 0xf
+[   0.7982 ] 
+[   0.7982 ] Updating mb1-bct with storage information
+[   0.7997 ] tegrabct_v2 --chip 0x18 --mb1bct mb1_bct_MB1.bct --updatestorageinfo flash.xml.bin
+[   0.8001 ] MB1-BCT version: 0xf
+[   0.8003 ] 
+[   0.8018 ] tegrahost_v2 --chip 0x18 --align mb1_bct_MB1.bct
+[   0.8023 ] 
+[   0.8038 ] tegrahost_v2 --chip 0x18 0 --appendsigheader mb1_bct_MB1.bct zerosbk
+[   0.8042 ] 
+[   0.8089 ] tegrasign_v3.py --key None --list mb1_bct_MB1_sigheader.bct_list.xml --pubkeyhash pub_key.key
+[   0.8089 ] Assuming zero filled SBK key
+[   0.8092 ] tegrahost_v2 --chip 0x18 0 --updatesigheader mb1_bct_MB1_sigheader.bct.encrypt mb1_bct_MB1_sigheader.bct.hash zerosbk
+[   0.8098 ] 
+[   0.8099 ] Copying signatures
+[   0.8115 ] tegrahost_v2 --chip 0x18 0 --partitionlayout flash.xml.bin --updatesig images_list_signed.xml
+[   0.9940 ] 
+[   0.9940 ] Boot Rom communication
+[   0.9970 ] tegrarcm_v2 --chip 0x18 0 --rcm rcm_list_signed.xml
+[   0.9986 ] BootRom is not running
+[   6.2267 ] 
+[   7.2328 ] tegrarcm_v2 --isapplet
+[   7.2358 ] Applet version 01.00.0000
+[   7.4892 ] 
+[   7.4893 ] Sending BCTs
+[   7.4941 ] tegrarcm_v2 --download bct_bootrom br_bct_BR.bct --download bct_mb1 mb1_bct_MB1_sigheader.bct.encrypt
+[   7.4971 ] Applet version 01.00.0000
+[   7.7616 ] Sending bct_bootrom
+[   7.7620 ] [................................................] 100%
+[   7.7634 ] Sending bct_mb1
+[   7.7641 ] [................................................] 100%
+[   7.7809 ] 
+[   7.7810 ] Generating blob
+[   7.7861 ] tegrahost_v2 --chip 0x18 --align blob_nvtboot_recovery_cpu.bin
+[   7.7895 ] 
+[   7.7943 ] tegrahost_v2 --chip 0x18 0 --appendsigheader blob_nvtboot_recovery_cpu.bin zerosbk
+[   7.7991 ] 
+[   7.8077 ] tegrasign_v3.py --key None --list blob_nvtboot_recovery_cpu_sigheader.bin_list.xml --pubkeyhash pub_key.key
+[   7.8080 ] Assuming zero filled SBK key
+[   7.8237 ] tegrahost_v2 --chip 0x18 0 --updatesigheader blob_nvtboot_recovery_cpu_sigheader.bin.encrypt blob_nvtboot_recovery_cpu_sigheader.bin.hash zerosbk
+[   7.8272 ] 
+[   7.8312 ] tegrahost_v2 --chip 0x18 --align blob_nvtboot_recovery.bin
+[   7.8341 ] 
+[   7.8381 ] tegrahost_v2 --chip 0x18 0 --appendsigheader blob_nvtboot_recovery.bin zerosbk
+[   7.8421 ] 
+[   7.8499 ] tegrasign_v3.py --key None --list blob_nvtboot_recovery_sigheader.bin_list.xml --pubkeyhash pub_key.key
+[   7.8501 ] Assuming zero filled SBK key
+[   7.8622 ] tegrahost_v2 --chip 0x18 0 --updatesigheader blob_nvtboot_recovery_sigheader.bin.encrypt blob_nvtboot_recovery_sigheader.bin.hash zerosbk
+[   7.8651 ] 
+[   7.8690 ] tegrahost_v2 --chip 0x18 --align blob_preboot_d15_prod_cr.bin
+[   7.8715 ] 
+[   7.8751 ] tegrahost_v2 --chip 0x18 0 --appendsigheader blob_preboot_d15_prod_cr.bin zerosbk
+[   7.8781 ] 
+[   7.8852 ] tegrasign_v3.py --key None --list blob_preboot_d15_prod_cr_sigheader.bin_list.xml --pubkeyhash pub_key.key
+[   7.8854 ] Assuming zero filled SBK key
+[   7.8914 ] tegrahost_v2 --chip 0x18 0 --updatesigheader blob_preboot_d15_prod_cr_sigheader.bin.encrypt blob_preboot_d15_prod_cr_sigheader.bin.hash zerosbk
+[   7.8932 ] 
+[   7.8958 ] tegrahost_v2 --chip 0x18 --align blob_mce_mts_d15_prod_cr.bin
+[   7.8972 ] 
+[   7.8997 ] tegrahost_v2 --chip 0x18 0 --appendsigheader blob_mce_mts_d15_prod_cr.bin zerosbk
+[   7.9060 ] 
+[   7.9116 ] tegrasign_v3.py --key None --list blob_mce_mts_d15_prod_cr_sigheader.bin_list.xml --pubkeyhash pub_key.key
+[   7.9117 ] Assuming zero filled SBK key
+[   7.9352 ] tegrahost_v2 --chip 0x18 0 --updatesigheader blob_mce_mts_d15_prod_cr_sigheader.bin.encrypt blob_mce_mts_d15_prod_cr_sigheader.bin.hash zerosbk
+[   7.9371 ] 
+[   7.9388 ] tegrahost_v2 --chip 0x18 --align blob_bpmp.bin
+[   7.9393 ] 
+[   7.9398 ] tegrahost_v2 --chip 0x18 0 --appendsigheader blob_bpmp.bin zerosbk
+[   7.9409 ] 
+[   7.9457 ] tegrasign_v3.py --key None --list blob_bpmp_sigheader.bin_list.xml --pubkeyhash pub_key.key
+[   7.9457 ] Assuming zero filled SBK key
+[   7.9552 ] tegrahost_v2 --chip 0x18 0 --updatesigheader blob_bpmp_sigheader.bin.encrypt blob_bpmp_sigheader.bin.hash zerosbk
+[   7.9575 ] 
+[   7.9600 ] tegrahost_v2 --chip 0x18 --align blob_tegra186-a02-bpmp-quill-p3310-1000-c04-00-te770d-ucm2.dtb
+[   7.9613 ] 
+[   7.9637 ] tegrahost_v2 --chip 0x18 0 --appendsigheader blob_tegra186-a02-bpmp-quill-p3310-1000-c04-00-te770d-ucm2.dtb zerosbk
+[   7.9662 ] 
+[   7.9718 ] tegrasign_v3.py --key None --list blob_tegra186-a02-bpmp-quill-p3310-1000-c04-00-te770d-ucm2_sigheader.dtb_list.xml --pubkeyhash pub_key.key
+[   7.9719 ] Assuming zero filled SBK key
+[   7.9838 ] tegrahost_v2 --chip 0x18 0 --updatesigheader blob_tegra186-a02-bpmp-quill-p3310-1000-c04-00-te770d-ucm2_sigheader.dtb.encrypt blob_tegra186-a02-bpmp-quill-p3310-1000-c04-00-te770d-ucm2_sigheader.dtb.hash zerosbk
+[   7.9855 ] 
+[   7.9877 ] tegrahost_v2 --chip 0x18 --align blob_tos-trusty.img
+[   7.9887 ] 
+[   7.9907 ] tegrahost_v2 --chip 0x18 0 --appendsigheader blob_tos-trusty.img zerosbk
+[   7.9924 ] 
+[   7.9976 ] tegrasign_v3.py --key None --list blob_tos-trusty_sigheader.img_list.xml --pubkeyhash pub_key.key
+[   7.9977 ] Assuming zero filled SBK key
+[   8.0043 ] tegrahost_v2 --chip 0x18 0 --updatesigheader blob_tos-trusty_sigheader.img.encrypt blob_tos-trusty_sigheader.img.hash zerosbk
+[   8.0056 ] 
+[   8.0074 ] tegrahost_v2 --chip 0x18 --align blob_eks.img
+[   8.0082 ] 
+[   8.0100 ] tegrahost_v2 --chip 0x18 0 --appendsigheader blob_eks.img zerosbk
+[   8.0109 ] 
+[   8.0161 ] tegrasign_v3.py --key None --list blob_eks_sigheader.img_list.xml --pubkeyhash pub_key.key
+[   8.0161 ] Assuming zero filled SBK key
+[   8.0177 ] tegrahost_v2 --chip 0x18 0 --updatesigheader blob_eks_sigheader.img.encrypt blob_eks_sigheader.img.hash zerosbk
+[   8.0188 ] 
+[   8.0209 ] tegrahost_v2 --chip 0x18 --align blob_tegra186-quill-p3310-1000-c03-00-base.dtb
+[   8.0220 ] 
+[   8.0240 ] tegrahost_v2 --chip 0x18 0 --appendsigheader blob_tegra186-quill-p3310-1000-c03-00-base.dtb zerosbk
+[   8.0255 ] 
+[   8.0308 ] tegrasign_v3.py --key None --list blob_tegra186-quill-p3310-1000-c03-00-base_sigheader.dtb_list.xml --pubkeyhash pub_key.key
+[   8.0309 ] Assuming zero filled SBK key
+[   8.0365 ] tegrahost_v2 --chip 0x18 0 --updatesigheader blob_tegra186-quill-p3310-1000-c03-00-base_sigheader.dtb.encrypt blob_tegra186-quill-p3310-1000-c03-00-base_sigheader.dtb.hash zerosbk
+[   8.0380 ] 
+[   8.0403 ] tegrahost_v2 --chip 0x18 --generateblob blob.xml blob.bin
+[   8.0413 ] number of images in blob are 9
+[   8.0416 ] blobsize is 4431736
+[   8.0417 ] Added binary blob_nvtboot_recovery_cpu_sigheader.bin.encrypt of size 225248
+[   8.0445 ] Added binary blob_nvtboot_recovery_sigheader.bin.encrypt of size 122272
+[   8.0452 ] Added binary blob_preboot_d15_prod_cr_sigheader.bin.encrypt of size 58256
+[   8.0462 ] Added binary blob_mce_mts_d15_prod_cr_sigheader.bin.encrypt of size 2197408
+[   8.0476 ] Added binary blob_bpmp_sigheader.bin.encrypt of size 534816
+[   8.0485 ] Added binary blob_tegra186-a02-bpmp-quill-p3310-1000-c04-00-te770d-ucm2_sigheader.dtb.encrypt of size 617920
+[   8.0495 ] Added binary blob_tos-trusty_sigheader.img.encrypt of size 407360
+[   8.0500 ] Added binary blob_eks_sigheader.img.encrypt of size 1440
+[   8.0505 ] Added binary blob_tegra186-quill-p3310-1000-c03-00-base_sigheader.dtb.encrypt of size 266864
+[   8.0527 ] 
+[   8.0528 ] Sending bootloader and pre-requisite binaries
+[   8.0550 ] tegrarcm_v2 --download blob blob.bin
+[   8.0561 ] Applet version 01.00.0000
+[   8.3108 ] Sending blob
+[   8.3110 ] [................................................] 100%
+[   8.8048 ] 
+[   8.8094 ] tegrarcm_v2 --boot recovery
+[   8.8124 ] Applet version 01.00.0000
+[   9.0672 ] 
+[  10.0731 ] tegrarcm_v2 --isapplet
+[  10.3816 ] 
+[  10.3892 ] tegradevflash_v2 --iscpubl
+[  10.3923 ] Cannot Open USB
+[  11.2068 ] 
+[  12.2128 ] tegrarcm_v2 --isapplet
+[  12.4695 ] 
+[  12.4742 ] tegradevflash_v2 --iscpubl
+[  12.4772 ] Bootloader version 01.00.0000
+[  12.6100 ] Bootloader version 01.00.0000
+[  12.6111 ] 
+[  12.6112 ] Retrieving storage infomation
+[  12.6155 ] tegrarcm_v2 --oem platformdetails storage storage_info.bin
+[  12.6182 ] Applet is not running on device. Continue with Bootloader
+[  12.8702 ] 
+[  12.8731 ] tegradevflash_v2 --oem platformdetails storage storage_info.bin
+[  12.8758 ] Bootloader version 01.00.0000
+[  13.0132 ] Saved platform info in storage_info.bin
+[  13.0175 ] 
+[  13.0177 ] Flashing the device
+[  13.0207 ] tegraparser_v2 --storageinfo storage_info.bin --generategpt --pt flash.xml.bin
+[  13.0214 ] 
+[  13.0229 ] tegradevflash_v2 --pt flash.xml.bin --create
+[  13.0235 ] Bootloader version 01.00.0000
+[  13.1419 ] Erasing sdmmc_boot: 3 ......... [Done]
+[  13.1484 ] Writing partition secondary_gpt with gpt_secondary_0_3.bin
+[  13.1492 ] [................................................] 100%
+
+[  13.1990 ] Erasing sdmmc_user: 3 ......... [Done]
+[  14.7315 ] Writing partition master_boot_record with mbr_1_3.bin
+[  14.7322 ] [................................................] 100%
+[  14.7363 ] Writing partition primary_gpt with gpt_primary_1_3.bin
+[  14.7379 ] [................................................] 100%
+[  14.7424 ] Writing partition secondary_gpt with gpt_secondary_1_3.bin
+[  14.7504 ] [................................................] 100%
+
+[  14.7619 ] Writing partition mb1 with mb1_prod.bin.encrypt
+[  14.7626 ] [................................................] 100%
+[  14.7700 ] Writing partition mb1_b with mb1_prod.bin.encrypt
+[  14.7910 ] [................................................] 100%
+[  14.7985 ] Writing partition spe-fw with spe_sigheader.bin.encrypt
+[  14.8211 ] [................................................] 100%
+[  14.8284 ] Writing partition spe-fw_b with spe_sigheader.bin.encrypt
+[  14.8628 ] [................................................] 100%
+[  14.8703 ] Writing partition mb2 with nvtboot_sigheader.bin.encrypt
+[  14.9009 ] [................................................] 100%
+[  14.9087 ] Writing partition mb2_b with nvtboot_sigheader.bin.encrypt
+[  14.9483 ] [................................................] 100%
+[  14.9556 ] Writing partition mts-preboot with preboot_d15_prod_cr_sigheader.bin.encrypt
+[  14.9997 ] [................................................] 100%
+[  15.0063 ] Writing partition mts-preboot_b with preboot_d15_prod_cr_sigheader.bin.encrypt
+[  15.0576 ] [................................................] 100%
+[  15.0641 ] Writing partition SMD with slot_metadata.bin
+[  15.1188 ] [................................................] 100%
+[  15.1234 ] Writing partition SMD_b with slot_metadata.bin
+[  15.1293 ] [................................................] 100%
+[  15.1338 ] Writing partition VER_b with emmc_bootblob_ver.txt
+[  15.1361 ] [................................................] 100%
+[  15.1407 ] Writing partition VER with emmc_bootblob_ver.txt
+[  15.1870 ] [................................................] 100%
+[  15.1913 ] Writing partition master_boot_record with mbr_1_3.bin
+[  15.1947 ] [................................................] 100%
+[  15.1988 ] Writing partition APP with system.img
+[  15.2002 ] [................................................] 100%
+[ 246.2458 ] Writing partition mts-bootpack with mce_mts_d15_prod_cr_sigheader.bin.encrypt
+[ 246.2638 ] [................................................] 100%
+[ 246.3615 ] Writing partition mts-bootpack_b with mce_mts_d15_prod_cr_sigheader.bin.encrypt
+[ 246.3655 ] [................................................] 100%
+[ 246.4633 ] Writing partition cpu-bootloader with cboot_sigheader.bin.encrypt
+[ 246.4672 ] [................................................] 100%
+[ 246.4816 ] Writing partition cpu-bootloader_b with cboot_sigheader.bin.encrypt
+[ 246.4877 ] [................................................] 100%
+[ 246.5023 ] Writing partition bootloader-dtb with tegra186-quill-p3310-1000-c03-00-base_sigheader.dtb.encrypt
+[ 246.5088 ] [................................................] 100%
+[ 246.5211 ] Writing partition bootloader-dtb_b with tegra186-quill-p3310-1000-c03-00-base_sigheader.dtb.encrypt
+[ 246.5273 ] [................................................] 100%
+[ 246.5399 ] Writing partition secure-os with tos-trusty_sigheader.img.encrypt
+[ 246.5473 ] [................................................] 100%
+[ 246.5639 ] Writing partition secure-os_b with tos-trusty_sigheader.img.encrypt
+[ 246.5711 ] [................................................] 100%
+[ 246.5878 ] Writing partition eks with eks_sigheader.img.encrypt
+[ 246.5949 ] [................................................] 100%
+[ 246.5992 ] Writing partition adsp-fw with adsp-fw_sigheader.bin.encrypt
+[ 246.6014 ] [................................................] 100%
+[ 246.6080 ] Writing partition adsp-fw_b with adsp-fw_sigheader.bin.encrypt
+[ 246.6117 ] [................................................] 100%
+[ 246.6186 ] Writing partition bpmp-fw with bpmp_sigheader.bin.encrypt
+[ 246.6222 ] [................................................] 100%
+[ 246.6429 ] Writing partition bpmp-fw_b with bpmp_sigheader.bin.encrypt
+[ 246.6515 ] [................................................] 100%
+[ 246.6726 ] Writing partition bpmp-fw-dtb with tegra186-a02-bpmp-quill-p3310-1000-c04-00-te770d-ucm2_sigheader.dtb.encrypt
+[ 246.6836 ] [................................................] 100%
+[ 246.7065 ] Writing partition bpmp-fw-dtb_b with tegra186-a02-bpmp-quill-p3310-1000-c04-00-te770d-ucm2_sigheader.dtb.encrypt
+[ 246.7169 ] [................................................] 100%
+[ 246.7400 ] Writing partition sce-fw with camera-rtcpu-sce_sigheader.img.encrypt
+[ 246.7499 ] [................................................] 100%
+[ 246.7577 ] Writing partition sce-fw_b with camera-rtcpu-sce_sigheader.img.encrypt
+[ 246.7619 ] [................................................] 100%
+[ 246.7700 ] Writing partition sc7 with warmboot_wbheader.bin.encrypt
+[ 246.7738 ] [................................................] 100%
+[ 246.7787 ] Writing partition sc7_b with warmboot_wbheader.bin.encrypt
+[ 246.7812 ] [................................................] 100%
+[ 246.7862 ] Writing partition BMP with bmp.blob
+[ 246.7884 ] [................................................] 100%
+[ 246.7996 ] Writing partition BMP_b with bmp.blob
+[ 246.8036 ] [................................................] 100%
+[ 246.8126 ] Writing partition recovery with recovery_sigheader.img.encrypt
+[ 246.8168 ] [................................................] 100%
+[ 248.8907 ] Writing partition recovery-dtb with tegra186-quill-p3310-1000-c03-00-base.dtb_sigheader.rec.encrypt
+[ 248.8966 ] [................................................] 100%
+[ 248.9086 ] Writing partition kernel-bootctrl with kernel_bootctrl.bin
+[ 248.9143 ] [................................................] 100%
+[ 248.9216 ] Writing partition kernel-bootctrl_b with kernel_bootctrl.bin
+[ 248.9232 ] [................................................] 100%
+[ 248.9285 ] Writing partition kernel with boot_sigheader.img.encrypt
+[ 248.9302 ] [................................................] 100%
+[ 248.9541 ] Writing partition kernel_b with boot_sigheader.img.encrypt
+[ 248.9639 ] [................................................] 100%
+[ 248.9876 ] Writing partition kernel-dtb with kernel_tegra186-quill-p3310-1000-c03-00-base_sigheader.dtb.encrypt
+[ 248.9998 ] [................................................] 100%
+[ 249.0117 ] Writing partition kernel-dtb_b with kernel_tegra186-quill-p3310-1000-c03-00-base_sigheader.dtb.encrypt
+[ 249.0179 ] [................................................] 100%
+[ 249.0349 ] 
+[ 249.0394 ] tegradevflash_v2 --write BCT br_bct_BR.bct
+[ 249.0421 ] Bootloader version 01.00.0000
+[ 249.1620 ] Writing partition BCT with br_bct_BR.bct
+[ 249.1627 ] [................................................] 100%
+[ 249.2206 ] 
+[ 249.2283 ] tegradevflash_v2 --write MB1_BCT mb1_cold_boot_bct_MB1_sigheader.bct.encrypt
+[ 249.2312 ] Bootloader version 01.00.0000
+[ 249.3539 ] Writing partition MB1_BCT with mb1_cold_boot_bct_MB1_sigheader.bct.encrypt
+[ 249.3550 ] [................................................] 100%
+[ 249.4221 ] 
+[ 249.4266 ] tegradevflash_v2 --write MB1_BCT_b mb1_cold_boot_bct_MB1_sigheader.bct.encrypt
+[ 249.4297 ] Bootloader version 01.00.0000
+[ 249.5498 ] Writing partition MB1_BCT_b with mb1_cold_boot_bct_MB1_sigheader.bct.encrypt
+[ 249.5509 ] [................................................] 100%
+[ 249.6100 ] 
+[ 249.6102 ] Flashing completed
+
+[ 249.6103 ] Coldbooting the device
+[ 249.6149 ] tegradevflash_v2 --reboot coldboot
+[ 249.6180 ] Bootloader version 01.00.0000
+[ 249.7420 ] 
+*** The target t186ref has been flashed successfully. ***
+Reset the board to boot from internal eMMC.
