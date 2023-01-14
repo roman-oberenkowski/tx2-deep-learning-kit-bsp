@@ -31,6 +31,7 @@ For nvidia's ./flash to work (had many problems with it)
 - `sh unpack.sh`
 - `sh build.sh`, message: "WARNING: could not open drivers/misc/mods/mods.dtb.S: No such file or directory" is normal
 - `sh prep_img.sh`, Note: It will update headers (but not modules) with generated ones 
+- (optional) Create user to skip OEM config later: `sudo ~/tx2_workdir/Linux_for_Tegra/tools/l4t_create_default_user.sh -u user -p password`
 - `sh flash.sh`
 - Expect `*** The target t186ref has been flashed successfully. *** Reset the board to boot from internal eMMC.`
 - Board should boot up without the need for power reset
